@@ -18,20 +18,31 @@ import ArticleSearchModal from "@/components/common/ArticleSearchModal";
 import QuickEnquiryModal from "@/components/common/QuickEnquiryModal";
 import FloatingWhatsApp from "@/components/common/FloatingWhatsApp";
 import WishlistDrawer from "@/components/common/WishlistDrawer";
+import FaqSizingModal from "@/components/common/FaqSizingModal";
+import ContactModal from "@/components/common/ContactModal";
+import PolicyModal from "@/components/common/PolicyModal";
 import { WishlistProvider } from "@/context/WishlistContext";
-import {
-  websiteSettings,
-  heroBanners,
-  categoryItems,
-  mockProducts,
-  mockReviews,
-} from "@/data/mockData";
+import { DataProvider, useData } from "@/context/DataContext";
 import { Product } from "@/types";
 
-export default function HomePage() {
+function StorefrontContent() {
+  const {
+    products,
+    categories,
+    heroBanners,
+    reviews,
+    settings,
+  } = useData();
+
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [enquiryModalProduct, setEnquiryModalProduct] = useState<Product | null>(null);
   const [enquiryInitialColor, setEnquiryInitialColor] = useState<string | undefined>(undefined);
+
+  // Modal states for customer care
+  const [isFaqOpen, setIsFaqOpen] = useState(false);
+  const [faqTab, setFaqTab] = useState<"sizing" | "faq">("sizing");
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [policyType, setPolicyType] = useState<"shipping" | "returns" | "privacy" | "terms" | null>(null);
 
   const handleOpenQuickEnquiry = (product: Product, selectedColor?: string) => {
     setEnquiryModalProduct(product);
@@ -44,80 +55,93 @@ export default function HomePage() {
   };
 
   return (
-    <WishlistProvider allProducts={mockProducts}>
+    <WishlistProvider allProducts={products}>
       <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#111111]">
         {/* 1. Slim Announcement Bar */}
-        <AnnouncementBar messages={websiteSettings.announcementMessages} />
+        <AnnouncementBar messages={settings.announcementMessages} />
 
         {/* 2. Responsive Sticky Header with Mega Menus */}
-        <Header onOpenSearch={() => setIsSearchOpen(true)} />
+        <Header
+          onOpenSearch={() => setIsSearchOpen(true)}
+          onOpenSizing={() => {
+            setFaqTab("sizing");
+            setIsFaqOpen(true);
+          }}
+        />
 
         {/* Main Page Flow */}
         <main className="flex-1">
           {/* 3. Hero Image Slider with Desktop & Mobile Banners */}
           <HeroSlider banners={heroBanners} />
 
-          {/* 4. Trust Features Bar */}
+          {/* 4. Trust Features Bar (Footwear Comfort Guarantees) */}
           <TrustFeatures />
 
           {/* 5. Shop by Category (Walkaroo-style photographic cards) */}
-          <CategorySection categories={categoryItems} />
+          <CategorySection categories={categories} />
 
           {/* 6. Best Sellers Carousel / Grid */}
           <BestSellersSection
-            products={mockProducts}
+            products={products}
             onQuickEnquire={handleOpenQuickEnquiry}
           />
 
-          {/* 7. Mid-page Editorial Banner 1 */}
+          {/* 7. Mid-page Editorial Banner 1 (Occasion Footwear) */}
           <PromoBanner
-            tagline="EXECUTIVE EXCELLENCE"
-            heading="A PERFECT FIT FOR EVERY OCCASION."
-            subheading="From high-stakes boardrooms to evening engagements, experience precision craftsmanship with all-day ergonomic poise."
-            ctaText="EXPLORE MEN"
-            ctaLink="#categories"
-            secondaryCtaText="EXPLORE WOMEN"
-            secondaryCtaLink="#categories"
-            imageSrc="/images/banners/promo-occasion.jpg"
+            tagline={settings.promoBanners.occasion.tagline}
+            heading={settings.promoBanners.occasion.heading}
+            subheading={settings.promoBanners.occasion.subheading}
+            ctaText={settings.promoBanners.occasion.ctaText}
+            ctaLink={settings.promoBanners.occasion.ctaLink}
+            secondaryCtaText={settings.promoBanners.occasion.secondaryCtaText}
+            secondaryCtaLink={settings.promoBanners.occasion.secondaryCtaLink}
+            imageSrc={settings.promoBanners.occasion.imageSrc}
           />
 
           {/* 8. New Arrivals Grid */}
           <NewArrivalsSection
-            products={mockProducts}
+            products={products}
             onQuickEnquire={handleOpenQuickEnquiry}
           />
 
-          {/* 9. Mid-page Editorial Banner 2 */}
+          {/* 9. Mid-page Editorial Banner 2 (Casual & Sneakers) */}
           <PromoBanner
-            tagline="CASUAL ELEGANCE"
-            heading="STYLE THAT SPEAKS FOR YOU."
-            subheading="Cloud-cushioned soles and contemporary streetwear silhouettes crafted to keep you ahead of the curve."
-            ctaText="SHOP SNEAKERS"
-            ctaLink="#categories"
-            secondaryCtaText="VIEW TRENDING"
-            secondaryCtaLink="#trending"
-            imageSrc="/images/banners/promo-lifestyle.jpg"
+            tagline={settings.promoBanners.lifestyle.tagline}
+            heading={settings.promoBanners.lifestyle.heading}
+            subheading={settings.promoBanners.lifestyle.subheading}
+            ctaText={settings.promoBanners.lifestyle.ctaText}
+            ctaLink={settings.promoBanners.lifestyle.ctaLink}
+            secondaryCtaText={settings.promoBanners.lifestyle.secondaryCtaText}
+            secondaryCtaLink={settings.promoBanners.lifestyle.secondaryCtaLink}
+            imageSrc={settings.promoBanners.lifestyle.imageSrc}
             reverse={true}
           />
 
           {/* 10. Trending Collection */}
           <TrendingSection
-            products={mockProducts}
+            products={products}
             onQuickEnquire={handleOpenQuickEnquiry}
           />
 
           {/* 11. Featured Collections Lookbook */}
           <FeaturedCollectionsSection />
 
-          {/* 12. Brand Introduction Narrative */}
+          {/* 12. Brand Introduction Narrative (100% Shoemaking & Footwear Craft) */}
           <BrandStory />
 
           {/* 13. Customer Reviews (Approved Verified Testimonials) */}
-          <CustomerReviews reviews={mockReviews} />
+          <CustomerReviews reviews={reviews} />
         </main>
 
-        {/* 14. Luxury Dark Footer */}
-        <Footer />
+        {/* 14. Luxury Dark Footer with Customer Care & Policy Actions */}
+        <Footer
+          onOpenFaq={() => {
+            setFaqTab("faq");
+            setIsFaqOpen(true);
+          }}
+          onOpenContact={() => setIsContactOpen(true)}
+          onOpenPolicy={(type) => setPolicyType(type)}
+        />
 
         {/* Floating WhatsApp Quick Action Button */}
         <FloatingWhatsApp />
@@ -126,7 +150,7 @@ export default function HomePage() {
         <ArticleSearchModal
           isOpen={isSearchOpen}
           onClose={() => setIsSearchOpen(false)}
-          products={mockProducts}
+          products={products}
           onSelectProduct={(p) => handleOpenQuickEnquiry(p)}
         />
 
@@ -140,7 +164,37 @@ export default function HomePage() {
 
         {/* Wishlist Drawer */}
         <WishlistDrawer onQuickEnquire={handleOpenQuickEnquiry} />
+
+        {/* FAQ & Footwear Sizing Help Modal */}
+        <FaqSizingModal
+          isOpen={isFaqOpen}
+          onClose={() => setIsFaqOpen(false)}
+          defaultTab={faqTab}
+        />
+
+        {/* Contact Us Modal */}
+        <ContactModal
+          isOpen={isContactOpen}
+          onClose={() => setIsContactOpen(false)}
+        />
+
+        {/* Policy Modals (Shipping, Returns, Privacy, Terms) */}
+        {policyType && (
+          <PolicyModal
+            isOpen={!!policyType}
+            onClose={() => setPolicyType(null)}
+            policyType={policyType}
+          />
+        )}
       </div>
     </WishlistProvider>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <DataProvider>
+      <StorefrontContent />
+    </DataProvider>
   );
 }

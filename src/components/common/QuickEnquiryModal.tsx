@@ -5,7 +5,7 @@ import Image from "next/image";
 import { X, MessageCircle, Heart, Check, AlertCircle, Sparkles, ShieldCheck } from "lucide-react";
 import { Product, ProductColor } from "@/types";
 import { useWishlist } from "@/context/WishlistContext";
-import { websiteSettings } from "@/data/mockData";
+import { useData } from "@/context/DataContext";
 
 interface QuickEnquiryModalProps {
   isOpen: boolean;
@@ -21,6 +21,7 @@ export default function QuickEnquiryModal({
   initialColorName,
 }: QuickEnquiryModalProps) {
   const { isInWishlist, toggleWishlist } = useWishlist();
+  const { settings, logEnquiryClick } = useData();
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -90,24 +91,17 @@ Colour: ${colorName}
 Please share availability and purchasing details.`;
 
     const encoded = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${websiteSettings.whatsappNumber}?text=${encoded}`;
+    const whatsappUrl = `https://wa.me/${settings.whatsappNumber}?text=${encoded}`;
 
-    // Record tracking click (prepared for Phase 4 Supabase logging)
-    try {
-      const existingClicks = JSON.parse(localStorage.getItem("cadlee_enquiry_clicks") || "[]");
-      existingClicks.unshift({
-        productId: product.id,
-        productName: product.name,
-        articleNumber: product.articleNumber,
-        selectedSize,
-        selectedColor: colorName,
-        timestamp: new Date().toISOString(),
-        source: "Homepage Quick Enquiry Modal",
-      });
-      localStorage.setItem("cadlee_enquiry_clicks", JSON.stringify(existingClicks.slice(0, 50)));
-    } catch {
-      // Storage fallback
-    }
+    // Record tracking click in centralized DataContext & localStorage
+    logEnquiryClick({
+      productId: product.id,
+      productName: product.name,
+      articleNumber: product.articleNumber,
+      selectedSize,
+      selectedColor: colorName,
+      source: "Footwear Quick Enquiry Modal",
+    });
 
     setTimeout(() => {
       setIsSubmitting(false);
@@ -340,3 +334,4 @@ Please share availability and purchasing details.`;
     </div>
   );
 }
+

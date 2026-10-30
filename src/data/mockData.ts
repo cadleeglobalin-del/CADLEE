@@ -8,14 +8,170 @@ export const websiteSettings: WebsiteSettings = {
   contactEmail: "care@cadlee.com",
   contactPhone: "+91 98765 43210",
   address: "CADLEE House, Footwear Boulevard, Industrial Park, India",
+  businessHours: "Monday – Saturday: 10:00 AM – 7:00 PM IST",
   instagramUrl: "https://instagram.com/cadleefootwear",
   facebookUrl: "https://facebook.com/cadleefootwear",
+  youtubeUrl: "https://youtube.com/@cadleefootwear",
+  twitterUrl: "https://twitter.com/cadleefootwear",
+  linkedinUrl: "https://linkedin.com/company/cadleefootwear",
   announcementMessages: [
-    "Discover the New CADLEE® Spring/Summer Collection",
-    "Handcrafted Elegance • Direct WhatsApp Assistance & Sizing",
+    "Discover the New CADLEE® Footwear Collection",
+    "Handcrafted Footwear • Direct WhatsApp Sizing Assistance",
     "Pan-India Fast Dispatch • Free Shipping on Enquiries above ₹1,999",
-    "Explore New Styles – Elevate Every Step with CADLEE®"
+    "Elevate Every Step with CADLEE® Handcrafted Shoes"
   ],
+  promoBanners: {
+    occasion: {
+      id: "promo-occasion",
+      tagline: "EXECUTIVE EXCELLENCE",
+      heading: "A PERFECT FIT FOR EVERY OCCASION.",
+      subheading: "From high-stakes boardrooms to evening engagements, experience precision craftsmanship with all-day ergonomic poise.",
+      ctaText: "EXPLORE MEN",
+      ctaLink: "#categories",
+      secondaryCtaText: "EXPLORE WOMEN",
+      secondaryCtaLink: "#categories",
+      imageSrc: "/images/banners/promo-occasion.jpg",
+    },
+    lifestyle: {
+      id: "promo-lifestyle",
+      tagline: "CASUAL ELEGANCE",
+      heading: "STYLE THAT SPEAKS FOR YOU.",
+      subheading: "Cloud-cushioned soles and contemporary streetwear silhouettes crafted to keep you ahead of the curve.",
+      ctaText: "SHOP SNEAKERS",
+      ctaLink: "#categories",
+      secondaryCtaText: "VIEW TRENDING",
+      secondaryCtaLink: "#trending",
+      imageSrc: "/images/banners/promo-lifestyle.jpg",
+    },
+  },
+  brandStory: {
+    tagline: "THE CADLEE® ETHOS",
+    title: "MORE THAN FOOTWEAR. A STATEMENT OF STYLE.",
+    paragraphs: [
+      "At CADLEE®, we believe footwear is the foundation of self-expression. A well-crafted pair doesn't just complement your style — it transforms how you carry yourself, infusing confidence into every step.",
+      "Dedicated purely to premium footwear, every CADLEE silhouette merges ergonomic footbeds, high-traction outsoles, and hand-finished detailing designed for durability and distinguished stride.",
+      "Through our personalized WhatsApp consultation model, our sizing advisors guide you directly before you acquire your pair, ensuring the fit is tailored precisely to your feet."
+    ],
+    image: "/images/brand/brand-story.jpg",
+    pillars: [
+      {
+        title: "Modern Silhouettes",
+        description: "Refined lines tailored for Indian proportions and international style."
+      },
+      {
+        title: "Direct Assistance",
+        description: "One-on-one size verification on WhatsApp prior to order dispatch."
+      }
+    ]
+  },
+  faqs: [
+    {
+      id: "faq-1",
+      question: "How do I find my exact CADLEE® footwear size?",
+      answer: "CADLEE follows standard UK/India sizing. If you usually wear UK 8 in formal shoes, choose size 8. If you have broad feet or fall between sizes, tap 'Enquire on WhatsApp' on the product page and our sizing specialists will advise you on the ideal fit.",
+      category: "sizing",
+    },
+    {
+      id: "faq-2",
+      question: "How do I purchase a pair from CADLEE?",
+      answer: "We operate a direct catalogue and WhatsApp enquiry model. Simply browse our catalogue, select your preferred size and color, and click 'Enquire on WhatsApp'. We will confirm availability and share immediate payment and dispatch instructions.",
+      category: "orders",
+    },
+    {
+      id: "faq-3",
+      question: "What is an Article Number and where do I find it?",
+      answer: "Every CADLEE design has a unique Article Number (such as CD-1025 or CD-1082). You can enter this code in the search bar on our website to jump directly to that exact shoe.",
+      category: "general",
+    },
+    {
+      id: "faq-4",
+      question: "How long does shipping take across India?",
+      answer: "Orders are dispatched within 24 to 48 hours via premium express couriers. Delivery typically takes 3 to 5 business days for major metropolitan hubs and 5 to 7 days for regional destinations.",
+      category: "shipping",
+    },
+    {
+      id: "faq-5",
+      question: "Can I exchange if the size does not fit comfortably?",
+      answer: "Yes, we offer a straightforward 7-day size exchange guarantee for unworn footwear in original box packaging. Contact our WhatsApp support team to arrange an exchange.",
+      category: "sizing",
+    },
+  ],
+  shippingPolicy: {
+    title: "Shipping & Dispatch Policy",
+    lastUpdated: "October 2026",
+    sections: [
+      {
+        heading: "1. Dispatch Timelines",
+        content: "All orders confirmed via our official WhatsApp desk are processed and packed within 24–48 business hours. You will receive an express courier tracking link directly on WhatsApp.",
+      },
+      {
+        heading: "2. Shipping Charges",
+        content: "We provide complimentary standard shipping across India on all footwear orders above ₹1,999. For orders below ₹1,999, a flat shipping fee of ₹99 is applied.",
+      },
+      {
+        heading: "3. Delivery Estimates",
+        content: "Metro Cities: 3–5 business days. Non-Metro Cities & Regional Areas: 5–7 business days. Remote Locations: 7–10 business days.",
+      },
+      {
+        heading: "4. Damage in Transit",
+        content: "All CADLEE boxes are securely packed. In the rare event of damage during transit, photograph the package upon delivery and notify our WhatsApp team within 24 hours.",
+      },
+    ],
+  },
+  returnsPolicy: {
+    title: "Returns & Exchange Policy",
+    lastUpdated: "October 2026",
+    sections: [
+      {
+        heading: "1. 7-Day Size Exchange",
+        content: "If your footwear does not fit as desired, we offer a hassle-free size exchange within 7 days of delivery. The item must be unused, unwashed, and in its original packaging with all tags intact.",
+      },
+      {
+        heading: "2. Return Process",
+        content: "To initiate an exchange, message our WhatsApp helpline with your Article Number and desired replacement size. Our team will coordinate reverse pickup where serviceable.",
+      },
+      {
+        heading: "3. Non-Returnable Items",
+        content: "Footwear showing visible wear marks on the outer sole, scuffs, or damaged packaging cannot be accepted for return or exchange.",
+      },
+    ],
+  },
+  privacyPolicy: {
+    title: "Privacy Policy",
+    lastUpdated: "October 2026",
+    sections: [
+      {
+        heading: "1. Information We Collect",
+        content: "CADLEE® respects your privacy. We collect only necessary details shared voluntarily when you enquire via WhatsApp or browse our catalogue (e.g. chosen footwear size, preferred colorway, delivery contact). We do not store payment card information as transactions are finalized directly with verified banking partners.",
+      },
+      {
+        heading: "2. Use of Information",
+        content: "Your contact details are used strictly to answer footwear enquiries, provide sizing assistance, and coordinate order fulfillment. We never sell or share your data with unauthorized third parties.",
+      },
+      {
+        heading: "3. Cookies & Storage",
+        content: "We use local browser storage exclusively to preserve your personal wishlist and article search history for your convenience.",
+      },
+    ],
+  },
+  termsPolicy: {
+    title: "Terms and Conditions",
+    lastUpdated: "October 2026",
+    sections: [
+      {
+        heading: "1. Website Use & Brand Ownership",
+        content: "CADLEE® is a registered footwear trademark. All logos, photography, text, and shoe designs displayed on this website are protected intellectual property. Unauthorized commercial reproduction is strictly prohibited.",
+      },
+      {
+        heading: "2. Product Availability & Pricing",
+        content: "Prices, offers, and size stocks are subject to change without prior notice. An enquiry sent through WhatsApp does not constitute a finalized contract until confirmed by our sales desk.",
+      },
+      {
+        heading: "3. Governing Law",
+        content: "Any disputes arising from the use of this website shall be governed by the laws of India and subject to local jurisdiction.",
+      },
+    ],
+  },
 };
 
 export const heroBanners: HeroBanner[] = [
@@ -66,7 +222,7 @@ export const heroBanners: HeroBanner[] = [
 ];
 
 export const categoryItems: CategoryItem[] = [
-  // MEN
+  // MEN FOOTWEAR
   {
     id: "cat-men-sneakers",
     name: "Sneakers",
@@ -122,7 +278,7 @@ export const categoryItems: CategoryItem[] = [
     featuredSubcategories: ["Comfort Flip Flops", "Leather Slides", "House Slippers"],
   },
 
-  // WOMEN
+  // WOMEN FOOTWEAR
   {
     id: "cat-women-heels",
     name: "Heels & Pumps",
@@ -178,7 +334,7 @@ export const categoryItems: CategoryItem[] = [
     featuredSubcategories: ["Cushioned Slides", "Ergonomic Flip Flops", "Indoor Slippers"],
   },
 
-  // KIDS
+  // KIDS FOOTWEAR
   {
     id: "cat-kids-boys",
     name: "Boys Footwear",
@@ -534,7 +690,7 @@ export const mockProducts: Product[] = [
     price: 2199,
     originalPrice: 2699,
     discountPercent: 19,
-    description: "Graceful pointed toe ballerina embellished with a delicate gold-tipped grosgrain bow. Effortlessly transitions from boardroom elegance to casual brunch.",
+    description: "Graceful pointed toe ballerina embellished with a delicate gold-tipped grosgrain bow. Effortlessly transitions from boardroom elegance to casual weekend strolls.",
     specifications: {
       "Upper": "Ultra-Soft Vegan Leather",
       "Insole": "Double Memory Cushioning",

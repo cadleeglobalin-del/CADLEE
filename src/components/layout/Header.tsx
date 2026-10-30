@@ -10,26 +10,29 @@ import {
   Menu, 
   X, 
   ChevronDown, 
-  ArrowRight,
   Sparkles,
   Flame,
-  Clock,
-  Layers
+  Layers,
+  Ruler,
+  ShieldAlert,
+  Lock
 } from "lucide-react";
 import CadleeLogo from "@/components/brand/CadleeLogo";
 import { useWishlist } from "@/context/WishlistContext";
-import { websiteSettings } from "@/data/mockData";
+import { useData } from "@/context/DataContext";
 
 interface HeaderProps {
   onOpenSearch: () => void;
+  onOpenSizing?: () => void;
 }
 
-export default function Header({ onOpenSearch }: HeaderProps) {
+export default function Header({ onOpenSearch, onOpenSizing }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState<string | null>(null);
   const { wishlistCount, setIsDrawerOpen: setWishlistDrawerOpen } = useWishlist();
+  const { settings } = useData();
 
   // Scroll listener for sticky header background transition
   useEffect(() => {
@@ -126,8 +129,10 @@ export default function Header({ onOpenSearch }: HeaderProps) {
   ];
 
   const openWhatsAppDirect = () => {
-    const text = encodeURIComponent("Hello CADLEE®, I am visiting your footwear catalogue and would like to enquire about sizing and styles.");
-    window.open(`https://wa.me/${websiteSettings.whatsappNumber}?text=${text}`, "_blank");
+    const text = encodeURIComponent(
+      "Hello CADLEE®, I am browsing your footwear catalogue and would like to enquire about sizing and styles."
+    );
+    window.open(`https://wa.me/${settings.whatsappNumber}?text=${text}`, "_blank");
   };
 
   return (
@@ -315,7 +320,21 @@ export default function Header({ onOpenSearch }: HeaderProps) {
             </nav>
 
             {/* Right Action Icons */}
-            <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3.5 shrink-0">
+              {/* Sizing Help Quick Trigger */}
+              {onOpenSizing && (
+                <button
+                  type="button"
+                  onClick={onOpenSizing}
+                  aria-label="Footwear Size Guide"
+                  className="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium text-[#38332E] hover:text-[#B99A70] hover:bg-[#F7F5F0] transition-colors"
+                  title="Footwear Size Chart"
+                >
+                  <Ruler className="w-3.5 h-3.5 text-[#B99A70]" />
+                  <span>Size Guide</span>
+                </button>
+              )}
+
               {/* Search Trigger Button */}
               <button
                 type="button"
@@ -360,6 +379,16 @@ export default function Header({ onOpenSearch }: HeaderProps) {
                 <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
                 <span className="uppercase text-[11px]">WhatsApp Enquiries</span>
               </button>
+
+              {/* Admin Portal Quick Lock Link */}
+              <Link
+                href="/admin"
+                aria-label="Admin Dashboard"
+                className="p-2 rounded-full text-[#38332E]/70 hover:text-[#B99A70] hover:bg-[#F7F5F0] transition-colors"
+                title="Admin Dashboard"
+              >
+                <Lock className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>
@@ -540,6 +569,15 @@ export default function Header({ onOpenSearch }: HeaderProps) {
                   <Layers className="w-4 h-4 text-[#B99A70]" />
                   COLLECTIONS
                 </Link>
+
+                <Link
+                  href="/admin"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-[#B99A70] hover:bg-[#F7F5F0] rounded-md transition-colors"
+                >
+                  <Lock className="w-4 h-4" />
+                  ADMIN PORTAL
+                </Link>
               </div>
             </div>
 
@@ -559,7 +597,7 @@ export default function Header({ onOpenSearch }: HeaderProps) {
 
               <div className="text-[11px] text-center text-[#38332E]/70 space-y-1">
                 <p>Official CADLEE® Customer Care</p>
-                <p className="font-semibold text-[#111111]">{websiteSettings.whatsappDisplayNumber}</p>
+                <p className="font-semibold text-[#111111]">{settings.whatsappDisplayNumber}</p>
               </div>
             </div>
           </div>

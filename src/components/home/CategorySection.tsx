@@ -102,3 +102,4 @@ export default function CategorySection({ categories }: CategorySectionProps) {
     </section>
   );
 }
+

@@ -118,3 +118,4 @@ export default function WishlistDrawer({ onQuickEnquire }: WishlistDrawerProps) 
     </div>
   );
 }
+

@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import { MessageCircle, X, Send, Sparkles } from "lucide-react";
 import CadleeLogo from "@/components/brand/CadleeLogo";
-import { websiteSettings } from "@/data/mockData";
+import { useData } from "@/context/DataContext";
 
 export default function FloatingWhatsApp() {
+  const { settings } = useData();
   const [isOpen, setIsOpen] = useState(false);
   const [customNote, setCustomNote] = useState("");
 
@@ -15,7 +16,7 @@ export default function FloatingWhatsApp() {
       text = `Hello CADLEE®, ${customNote.trim()}`;
     }
     const encoded = encodeURIComponent(text);
-    window.open(`https://wa.me/${websiteSettings.whatsappNumber}?text=${encoded}`, "_blank");
+    window.open(`https://wa.me/${settings.whatsappNumber}?text=${encoded}`, "_blank");
     setIsOpen(false);
   };
 
@@ -70,7 +71,7 @@ export default function FloatingWhatsApp() {
             </button>
 
             <p className="text-[10px] text-center text-[#38332E]/60">
-              Direct official assistance from {websiteSettings.whatsappDisplayNumber}
+              Direct official assistance from {settings.whatsappDisplayNumber}
             </p>
           </div>
         </div>
@@ -94,3 +95,4 @@ export default function FloatingWhatsApp() {
     </div>
   );
 }
+
