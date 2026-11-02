@@ -109,3 +109,20 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #B99A70;
 }
+
+/* Background Moving CADLEE Watermark */
+@keyframes cadleeRightToLeftMove {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.cadlee-moving-track {
+  display: flex !important;
+  width: max-content !important;
+  will-change: transform !important;
+  animation: cadleeRightToLeftMove 26s linear infinite !important;
+}

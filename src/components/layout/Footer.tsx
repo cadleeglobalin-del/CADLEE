@@ -8,8 +8,7 @@ import {
   Phone, 
   MapPin, 
   ArrowRight,
-  ShieldCheck,
-  Lock
+  ShieldCheck
 } from "lucide-react";
 import CadleeLogo from "@/components/brand/CadleeLogo";
 import { useData } from "@/context/DataContext";
@@ -29,7 +28,7 @@ export default function Footer({
   const currentYear = 2026;
 
   return (
-    <footer className="bg-[#111111] text-[#F7F5F0] border-t border-[#25211E] pt-16 pb-10">
+    <footer className="bg-[#111111] text-[#F7F5F0] border-t border-[#25211E] pt-16 pb-10 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-[#25211E]">
@@ -143,15 +142,6 @@ export default function Footer({
               <li><Link href="#bestsellers" className="hover:text-white transition-colors">Best Sellers</Link></li>
               <li><Link href="#collections" className="hover:text-white transition-colors">Featured Collections</Link></li>
               <li><Link href="#categories" className="hover:text-white transition-colors">Complete Catalogue</Link></li>
-              <li>
-                <Link
-                  href="/admin"
-                  className="inline-flex items-center gap-1.5 text-[#B99A70] hover:text-white transition-colors font-semibold"
-                >
-                  <Lock className="w-3 h-3" />
-                  <span>Admin Dashboard</span>
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -228,12 +218,8 @@ export default function Footer({
             </p>
           </div>
 
-          <div className="flex items-center gap-4 text-[11px]">
+          <div className="flex items-center gap-4 text-[11px] text-[#D9D0C3]/60">
             <span>100% Dedicated Footwear Catalogue</span>
-            <span>•</span>
-            <Link href="/admin" className="hover:text-white transition-colors text-[#B99A70] font-mono">
-              Store Manager
-            </Link>
           </div>
         </div>
       </div>

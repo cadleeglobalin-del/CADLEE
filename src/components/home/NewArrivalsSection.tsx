@@ -18,10 +18,10 @@ export default function NewArrivalsSection({
   const newProducts = products.filter((p) => p.isNewArrival);
 
   return (
-    <section id="new-arrivals" className="py-14 sm:py-20 bg-[#F7F5F0]">
+    <section id="new-arrivals" className="py-14 sm:py-20 bg-transparent relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4 relative z-10">
           <div>
             <div className="inline-flex items-center gap-2 mb-2">
               <span className="w-5 h-px bg-[#B99A70]" />

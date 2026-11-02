@@ -83,6 +83,8 @@ export interface BrandStoryContent {
   paragraphs: string[];
   image: string;
   pillars: { title: string; description: string }[];
+  badgeTitle?: string;
+  badgeDescription?: string;
 }
 
 export interface FAQItem {

@@ -53,6 +53,8 @@ export const websiteSettings: WebsiteSettings = {
       "Through our personalized WhatsApp consultation model, our sizing advisors guide you directly before you acquire your pair, ensuring the fit is tailored precisely to your feet."
     ],
     image: "/images/brand/brand-story.jpg",
+    badgeTitle: "CADLEE® FOOTWEAR",
+    badgeDescription: "Designed for everyday elegance, constructed for enduring stride comfort.",
     pillars: [
       {
         title: "Modern Silhouettes",

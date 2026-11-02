@@ -23,7 +23,7 @@ export default function ProductCard({ product, onQuickEnquire }: ProductCardProp
   const displayImage = hoveredImage || product.mainImage;
 
   return (
-    <div className="group relative bg-[#FFFFFF] rounded-lg border border-[#EAE8E3] hover:border-[#B99A70] hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden">
+    <div className="group relative z-10 bg-[#FFFFFF] rounded-lg border border-[#EAE8E3] hover:border-[#B99A70] hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden">
       {/* Badges Container */}
       <div className="absolute top-2.5 left-2.5 z-10 flex flex-col gap-1 items-start">
         {product.isTrending && (

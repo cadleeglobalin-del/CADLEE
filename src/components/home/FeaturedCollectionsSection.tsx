@@ -6,10 +6,10 @@ import { featuredCollections } from "@/data/mockData";
 
 export default function FeaturedCollectionsSection() {
   return (
-    <section id="collections" className="py-14 sm:py-20 bg-[#F7F5F0]">
+    <section id="collections" className="py-14 sm:py-20 bg-transparent relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 relative z-10">
           <div className="inline-flex items-center justify-center gap-2 mb-2">
             <span className="w-5 h-px bg-[#B99A70]" />
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B99A70]">
@@ -30,7 +30,7 @@ export default function FeaturedCollectionsSection() {
           {featuredCollections.map((col, index) => (
             <div
               key={col.id}
-              className={`group relative overflow-hidden rounded-xl bg-[#111111] min-h-[320px] sm:min-h-[380px] flex flex-col justify-end p-6 sm:p-8 border border-[#EAE8E3] hover:border-[#B99A70] transition-all duration-500 shadow-md ${
+              className={`group relative z-10 overflow-hidden rounded-xl bg-[#111111] min-h-[320px] sm:min-h-[380px] flex flex-col justify-end p-6 sm:p-8 border border-[#EAE8E3] hover:border-[#B99A70] transition-all duration-500 shadow-md ${
                 index === 0 ? "md:col-span-2 md:min-h-[420px]" : ""
               }`}
             >

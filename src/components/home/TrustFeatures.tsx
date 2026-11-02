@@ -26,7 +26,7 @@ export default function TrustFeatures() {
   ];
 
   return (
-    <section aria-label="Brand Guarantees" className="bg-[#FFFFFF] border-b border-[#EAE8E3] py-8 sm:py-10">
+    <section aria-label="Brand Guarantees" className="bg-[#FFFFFF] border-b border-[#EAE8E3] py-8 sm:py-10 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {features.map((f, i) => {

@@ -24,10 +24,10 @@ export default function BestSellersSection({
   });
 
   return (
-    <section id="bestsellers" className="py-14 sm:py-20 bg-[#FFFFFF] border-b border-[#EAE8E3]">
+    <section id="bestsellers" className="py-14 sm:py-20 bg-transparent border-b border-[#EAE8E3] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4 relative z-10">
           <div>
             <div className="inline-flex items-center gap-2 mb-2">
               <span className="w-5 h-px bg-[#B99A70]" />
@@ -72,7 +72,7 @@ export default function BestSellersSection({
         </div>
 
         {/* Products Grid: 4 columns on desktop, 2-3 on tablet, 2 on mobile */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 relative z-10">
           {bestSellerProducts.slice(0, 8).map((product) => (
             <ProductCard
               key={product.id}

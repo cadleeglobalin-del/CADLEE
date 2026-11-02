@@ -20,10 +20,10 @@ export default function CustomerReviews({ reviews }: CustomerReviewsProps) {
   };
 
   return (
-    <section className="py-16 sm:py-24 bg-[#F7F5F0] border-b border-[#EAE8E3]">
+    <section className="py-16 sm:py-24 bg-transparent border-b border-[#EAE8E3] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16 relative z-10">
           <div className="inline-flex items-center justify-center gap-2 mb-2">
             <span className="w-5 h-px bg-[#B99A70]" />
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B99A70]">
@@ -44,7 +44,7 @@ export default function CustomerReviews({ reviews }: CustomerReviewsProps) {
           {reviews.map((rev) => (
             <div
               key={rev.id}
-              className="bg-[#FFFFFF] rounded-xl p-5 sm:p-6 border border-[#EAE8E3] shadow-sm hover:border-[#B99A70] hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+              className="bg-[#FFFFFF] rounded-xl p-5 sm:p-6 border border-[#EAE8E3] shadow-sm hover:border-[#B99A70] hover:shadow-md transition-all duration-300 flex flex-col justify-between relative z-10"
             >
               <div>
                 {/* Star rating */}

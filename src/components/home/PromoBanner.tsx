@@ -27,7 +27,7 @@ export default function PromoBanner({
   reverse = false,
 }: PromoBannerProps) {
   return (
-    <section className="relative w-full bg-[#111111] overflow-hidden my-4 sm:my-8">
+    <section className="relative z-10 w-full bg-[#111111] overflow-hidden my-4 sm:my-8">
       <div className="relative min-h-[380px] sm:min-h-[460px] md:min-h-[520px] w-full flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full">

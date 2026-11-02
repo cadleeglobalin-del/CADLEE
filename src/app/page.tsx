@@ -21,6 +21,7 @@ import WishlistDrawer from "@/components/common/WishlistDrawer";
 import FaqSizingModal from "@/components/common/FaqSizingModal";
 import ContactModal from "@/components/common/ContactModal";
 import PolicyModal from "@/components/common/PolicyModal";
+import BackgroundMovingBrand from "@/components/common/BackgroundMovingBrand";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { DataProvider, useData } from "@/context/DataContext";
 import { Product } from "@/types";
@@ -56,7 +57,10 @@ function StorefrontContent() {
 
   return (
     <WishlistProvider allProducts={products}>
-      <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#111111]">
+      <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#111111] relative">
+        {/* Continuous Horizontal Moving Brand Watermark in Website Background */}
+        <BackgroundMovingBrand />
+
         {/* 1. Slim Announcement Bar */}
         <AnnouncementBar messages={settings.announcementMessages} />
 
@@ -70,7 +74,7 @@ function StorefrontContent() {
         />
 
         {/* Main Page Flow */}
-        <main className="flex-1">
+        <main className="flex-1 relative z-[1]">
           {/* 3. Hero Image Slider with Desktop & Mobile Banners */}
           <HeroSlider banners={heroBanners} />
 

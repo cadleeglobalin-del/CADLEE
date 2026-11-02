@@ -16,10 +16,10 @@ export default function CategorySection({ categories }: CategorySectionProps) {
   const filteredCategories = categories.filter((c) => c.gender === activeGender);
 
   return (
-    <section id="categories" className="py-14 sm:py-20 bg-[#F7F5F0]">
+    <section id="categories" className="py-14 sm:py-20 bg-transparent relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4 relative z-10">
           <div>
             <div className="inline-flex items-center gap-2 mb-2">
               <span className="w-5 h-px bg-[#B99A70]" />
@@ -59,7 +59,7 @@ export default function CategorySection({ categories }: CategorySectionProps) {
             <Link
               key={cat.id}
               href={`#products-${cat.slug}`}
-              className="group relative flex flex-col bg-[#FFFFFF] rounded-lg overflow-hidden border border-[#EAE8E3] hover:border-[#B99A70] hover:shadow-lg transition-all duration-300"
+              className="group relative z-10 flex flex-col bg-[#FFFFFF] rounded-lg overflow-hidden border border-[#EAE8E3] hover:border-[#B99A70] hover:shadow-lg transition-all duration-300"
             >
               {/* Image Container with zoom */}
               <div className="relative aspect-square w-full overflow-hidden bg-[#F4F3F0]">

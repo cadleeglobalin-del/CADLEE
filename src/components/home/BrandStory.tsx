@@ -12,11 +12,11 @@ export default function BrandStory() {
   const story = settings.brandStory;
 
   return (
-    <section className="py-16 sm:py-24 bg-[#FFFFFF] border-b border-[#EAE8E3] overflow-hidden">
+    <section className="py-16 sm:py-24 bg-transparent border-b border-[#EAE8E3] overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           {/* Imagery side: 100% handcrafted shoemaking & leather craft */}
-          <div className="lg:col-span-6 relative">
+          <div className="lg:col-span-6 relative z-10">
             <div className="relative aspect-[4/3] sm:aspect-[16/11] rounded-2xl overflow-hidden border border-[#EAE8E3] shadow-lg bg-[#FAF9F6]">
               <Image
                 src={story.image || "/images/brand/brand-story.jpg"}
@@ -33,17 +33,17 @@ export default function BrandStory() {
               <div className="flex items-center gap-3 mb-2">
                 <CadleeLogo variant="emblem" theme="light" width={28} height={42} showLink={false} />
                 <span className="text-[11px] font-bold tracking-widest text-[#B99A70] uppercase">
-                  CADLEE® FOOTWEAR
+                  {story.badgeTitle || "CADLEE® FOOTWEAR"}
                 </span>
               </div>
               <p className="text-[11px] text-[#D9D0C3] leading-snug">
-                Designed for everyday elegance, constructed for enduring stride comfort.
+                {story.badgeDescription || "Designed for everyday elegance, constructed for enduring stride comfort."}
               </p>
             </div>
           </div>
 
           {/* Narrative Content */}
-          <div className="lg:col-span-6 pt-6 lg:pt-0">
+          <div className="lg:col-span-6 pt-6 lg:pt-0 relative z-10">
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="w-6 h-px bg-[#B99A70]" />
               <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B99A70]">

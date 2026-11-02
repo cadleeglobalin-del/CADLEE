@@ -31,6 +31,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import CadleeLogo from "@/components/brand/CadleeLogo";
+import ImageUploader from "@/components/ImageUploader";
 import { useData, DataProvider } from "@/context/DataContext";
 import { Product, CategoryItem, HeroBanner, Review, FAQItem, ProductColor } from "@/types";
 
@@ -528,17 +529,11 @@ function AdminDashboardContent() {
                       </div>
                     </div>
 
-                    <div>
-                      <label className="block text-[10px] font-semibold uppercase text-[#38332E]/70 mb-1">
-                        Category Image URL
-                      </label>
-                      <input
-                        type="text"
-                        value={cat.image}
-                        onChange={(e) => updateCategory(cat.id, { image: e.target.value })}
-                        className="w-full px-2.5 py-1.5 rounded-lg border border-[#D9D0C3] text-xs font-mono text-[#111111] bg-white outline-none"
-                      />
-                    </div>
+                    <ImageUploader
+                      label="Category Image"
+                      value={cat.image}
+                      onChange={(url) => updateCategory(cat.id, { image: url })}
+                    />
 
                     <div>
                       <label className="block text-[10px] font-semibold uppercase text-[#38332E]/70 mb-1">
@@ -623,24 +618,16 @@ function AdminDashboardContent() {
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-[11px] font-semibold text-[#111111] mb-1">Desktop Image URL</label>
-                          <input
-                            type="text"
-                            value={banner.desktopImage}
-                            onChange={(e) => updateHeroBanner(banner.id, { desktopImage: e.target.value })}
-                            className="w-full px-3 py-2 rounded-lg border border-[#D9D0C3] text-xs font-mono text-[#111111] bg-white outline-none"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[11px] font-semibold text-[#111111] mb-1">Mobile Image URL</label>
-                          <input
-                            type="text"
-                            value={banner.mobileImage}
-                            onChange={(e) => updateHeroBanner(banner.id, { mobileImage: e.target.value })}
-                            className="w-full px-3 py-2 rounded-lg border border-[#D9D0C3] text-xs font-mono text-[#111111] bg-white outline-none"
-                          />
-                        </div>
+                        <ImageUploader
+                          label="Desktop Banner Image"
+                          value={banner.desktopImage}
+                          onChange={(url) => updateHeroBanner(banner.id, { desktopImage: url })}
+                        />
+                        <ImageUploader
+                          label="Mobile Banner Image"
+                          value={banner.mobileImage}
+                          onChange={(url) => updateHeroBanner(banner.id, { mobileImage: url })}
+                        />
                       </div>
                     </div>
                   ))}
@@ -654,11 +641,27 @@ function AdminDashboardContent() {
                 </h3>
 
                 {/* Banner 1: Occasion */}
-                <div className="p-5 rounded-xl border border-[#EAE8E3] bg-[#FAF9F6] space-y-3">
+                <div className="p-5 rounded-xl border border-[#EAE8E3] bg-[#FAF9F6] space-y-4">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-[#111111]">
                     Banner 1: {settings.promoBanners.occasion.heading}
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">Tagline</label>
+                      <input
+                        type="text"
+                        value={settings.promoBanners.occasion.tagline || ""}
+                        onChange={(e) =>
+                          updateSettings({
+                            promoBanners: {
+                              ...settings.promoBanners,
+                              occasion: { ...settings.promoBanners.occasion, tagline: e.target.value },
+                            },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none"
+                      />
+                    </div>
                     <div>
                       <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">Heading</label>
                       <input
@@ -675,31 +678,61 @@ function AdminDashboardContent() {
                         className="w-full px-3 py-1.5 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none"
                       />
                     </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">Subheading</label>
+                    <textarea
+                      rows={2}
+                      value={settings.promoBanners.occasion.subheading}
+                      onChange={(e) =>
+                        updateSettings({
+                          promoBanners: {
+                            ...settings.promoBanners,
+                            occasion: { ...settings.promoBanners.occasion, subheading: e.target.value },
+                          },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none resize-none"
+                    />
+                  </div>
+
+                  <ImageUploader
+                    label="Banner 1 Image (Upload or Paste URL)"
+                    value={settings.promoBanners.occasion.imageSrc}
+                    onChange={(url) =>
+                      updateSettings({
+                        promoBanners: {
+                          ...settings.promoBanners,
+                          occasion: { ...settings.promoBanners.occasion, imageSrc: url },
+                        },
+                      })
+                    }
+                  />
+                </div>
+
+                {/* Banner 2: Lifestyle */}
+                <div className="p-5 rounded-xl border border-[#EAE8E3] bg-[#FAF9F6] space-y-4">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#111111]">
+                    Banner 2: {settings.promoBanners.lifestyle.heading}
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">Subheading</label>
+                      <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">Tagline</label>
                       <input
                         type="text"
-                        value={settings.promoBanners.occasion.subheading}
+                        value={settings.promoBanners.lifestyle.tagline || ""}
                         onChange={(e) =>
                           updateSettings({
                             promoBanners: {
                               ...settings.promoBanners,
-                              occasion: { ...settings.promoBanners.occasion, subheading: e.target.value },
+                              lifestyle: { ...settings.promoBanners.lifestyle, tagline: e.target.value },
                             },
                           })
                         }
                         className="w-full px-3 py-1.5 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none"
                       />
                     </div>
-                  </div>
-                </div>
-
-                {/* Banner 2: Lifestyle */}
-                <div className="p-5 rounded-xl border border-[#EAE8E3] bg-[#FAF9F6] space-y-3">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#111111]">
-                    Banner 2: {settings.promoBanners.lifestyle.heading}
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">Heading</label>
                       <input
@@ -716,23 +749,47 @@ function AdminDashboardContent() {
                         className="w-full px-3 py-1.5 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none"
                       />
                     </div>
-                    <div>
-                      <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">Subheading</label>
-                      <input
-                        type="text"
-                        value={settings.promoBanners.lifestyle.subheading}
-                        onChange={(e) =>
-                          updateSettings({
-                            promoBanners: {
-                              ...settings.promoBanners,
-                              lifestyle: { ...settings.promoBanners.lifestyle, subheading: e.target.value },
-                            },
-                          })
-                        }
-                        className="w-full px-3 py-1.5 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none"
-                      />
-                    </div>
                   </div>
+
+                  <div>
+                    <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">Subheading</label>
+                    <textarea
+                      rows={2}
+                      value={settings.promoBanners.lifestyle.subheading}
+                      onChange={(e) =>
+                        updateSettings({
+                          promoBanners: {
+                            ...settings.promoBanners,
+                            lifestyle: { ...settings.promoBanners.lifestyle, subheading: e.target.value },
+                          },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none resize-none"
+                    />
+                  </div>
+
+                  <ImageUploader
+                    label="Banner 2 Image (Upload or Paste URL)"
+                    value={settings.promoBanners.lifestyle.imageSrc}
+                    onChange={(url) =>
+                      updateSettings({
+                        promoBanners: {
+                          ...settings.promoBanners,
+                          lifestyle: { ...settings.promoBanners.lifestyle, imageSrc: url },
+                        },
+                      })
+                    }
+                  />
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={() => showToast("Promotional banners updated successfully!")}
+                    className="px-5 py-2.5 rounded-xl bg-[#111111] text-white text-xs font-semibold hover:bg-[#B99A70] hover:text-[#111111] transition-colors"
+                  >
+                    Save Promotional Banners
+                  </button>
                 </div>
               </div>
             </div>
@@ -808,7 +865,7 @@ function AdminDashboardContent() {
               </div>
 
               {/* Brand Story Editor */}
-              <div className="p-5 rounded-xl border border-[#EAE8E3] bg-[#FAF9F6] space-y-4">
+              <div className="p-5 rounded-xl border border-[#EAE8E3] bg-[#FAF9F6] space-y-5">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-[#B99A70]">
                   Brand Story Section
                 </h3>
@@ -843,39 +900,172 @@ function AdminDashboardContent() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-[11px] font-semibold text-[#111111] mb-1">Shoemaking Image URL</label>
-                  <input
-                    type="text"
-                    value={settings.brandStory.image}
-                    onChange={(e) =>
-                      updateSettings({
-                        brandStory: { ...settings.brandStory, image: e.target.value },
-                      })
-                    }
-                    className="w-full px-3 py-2 rounded-lg border border-[#D9D0C3] text-xs font-mono text-[#111111] bg-white outline-none"
-                  />
+                <ImageUploader
+                  label="Shoemaking / Brand Story Image (Upload or Paste URL)"
+                  value={settings.brandStory.image}
+                  onChange={(url) =>
+                    updateSettings({
+                      brandStory: { ...settings.brandStory, image: url },
+                    })
+                  }
+                />
+
+                {/* Overlapping Badge Details */}
+                <div className="p-4 rounded-lg bg-white border border-[#EAE8E3] space-y-3">
+                  <h4 className="text-xs font-bold text-[#111111] uppercase tracking-wider">
+                    Image Overlay Badge (Floating Box on Image)
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">Badge Title</label>
+                      <input
+                        type="text"
+                        value={settings.brandStory.badgeTitle || "CADLEE® FOOTWEAR"}
+                        onChange={(e) =>
+                          updateSettings({
+                            brandStory: { ...settings.brandStory, badgeTitle: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">Badge Description</label>
+                      <input
+                        type="text"
+                        value={settings.brandStory.badgeDescription || ""}
+                        onChange={(e) =>
+                          updateSettings({
+                            brandStory: { ...settings.brandStory, badgeDescription: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none"
+                      />
+                    </div>
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-[11px] font-semibold text-[#111111] mb-1">Paragraphs</label>
-                  <div className="space-y-2">
+                {/* Story Description Paragraphs */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <label className="block text-[11px] font-semibold text-[#111111]">
+                      Story Narrative Descriptions / Paragraphs ({settings.brandStory.paragraphs.length})
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        updateSettings({
+                          brandStory: {
+                            ...settings.brandStory,
+                            paragraphs: [
+                              ...settings.brandStory.paragraphs,
+                              "New narrative paragraph highlighting CADLEE footwear craftsmanship and comfort.",
+                            ],
+                          },
+                        });
+                        showToast("New paragraph added!");
+                      }}
+                      className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#B99A70] hover:text-[#111111]"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>Add Paragraph</span>
+                    </button>
+                  </div>
+
+                  <div className="space-y-3">
                     {settings.brandStory.paragraphs.map((p, idx) => (
-                      <textarea
-                        key={idx}
-                        rows={2}
-                        value={p}
-                        onChange={(e) => {
-                          const updated = [...settings.brandStory.paragraphs];
-                          updated[idx] = e.target.value;
-                          updateSettings({
-                            brandStory: { ...settings.brandStory, paragraphs: updated },
-                          });
-                        }}
-                        className="w-full px-3 py-2 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none"
-                      />
+                      <div key={idx} className="flex gap-2 items-start">
+                        <textarea
+                          rows={3}
+                          value={p}
+                          onChange={(e) => {
+                            const updated = [...settings.brandStory.paragraphs];
+                            updated[idx] = e.target.value;
+                            updateSettings({
+                              brandStory: { ...settings.brandStory, paragraphs: updated },
+                            });
+                          }}
+                          className="flex-1 px-3 py-2 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (settings.brandStory.paragraphs.length <= 1) {
+                              alert("You must keep at least one paragraph.");
+                              return;
+                            }
+                            const updated = settings.brandStory.paragraphs.filter((_, i) => i !== idx);
+                            updateSettings({
+                              brandStory: { ...settings.brandStory, paragraphs: updated },
+                            });
+                            showToast("Paragraph removed");
+                          }}
+                          className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg shrink-0 mt-1"
+                          title="Delete paragraph"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     ))}
                   </div>
+                </div>
+
+                {/* Core Pillars */}
+                <div className="space-y-3 pt-3 border-t border-[#EAE8E3]">
+                  <h4 className="text-xs font-bold text-[#111111] uppercase tracking-wider">
+                    Core Value Pillars (Bullet Points)
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {settings.brandStory.pillars.map((pillar, pIdx) => (
+                      <div key={pIdx} className="p-3 rounded-lg bg-white border border-[#EAE8E3] space-y-2">
+                        <div>
+                          <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">
+                            Pillar {pIdx + 1} Title
+                          </label>
+                          <input
+                            type="text"
+                            value={pillar.title}
+                            onChange={(e) => {
+                              const updated = [...settings.brandStory.pillars];
+                              updated[pIdx] = { ...pillar, title: e.target.value };
+                              updateSettings({
+                                brandStory: { ...settings.brandStory, pillars: updated },
+                              });
+                            }}
+                            className="w-full px-2.5 py-1.5 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-semibold text-[#38332E]/70 mb-1">
+                            Pillar {pIdx + 1} Description
+                          </label>
+                          <textarea
+                            rows={2}
+                            value={pillar.description}
+                            onChange={(e) => {
+                              const updated = [...settings.brandStory.pillars];
+                              updated[pIdx] = { ...pillar, description: e.target.value };
+                              updateSettings({
+                                brandStory: { ...settings.brandStory, pillars: updated },
+                              });
+                            }}
+                            className="w-full px-2.5 py-1.5 rounded-lg border border-[#D9D0C3] text-xs text-[#111111] bg-white outline-none resize-none"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Save Button */}
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={() => showToast("Brand story updated successfully!")}
+                    className="px-5 py-2.5 rounded-xl bg-[#111111] text-white text-xs font-semibold hover:bg-[#B99A70] hover:text-[#111111] transition-colors"
+                  >
+                    Save Brand Story
+                  </button>
                 </div>
               </div>
             </div>
@@ -1409,15 +1599,11 @@ function AdminDashboardContent() {
                 />
               </div>
 
-              <div>
-                <label className="block text-[11px] font-semibold text-[#111111] mb-1">Main Image URL</label>
-                <input
-                  type="text"
+              <ImageUploader
+                  label="Main Product Image"
                   value={editingProduct.mainImage}
-                  onChange={(e) => setEditingProduct({ ...editingProduct, mainImage: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg border border-[#D9D0C3] text-xs font-mono text-[#111111] outline-none"
+                  onChange={(url) => setEditingProduct({ ...editingProduct, mainImage: url })}
                 />
-              </div>
 
               {/* Status checkboxes */}
               <div className="flex items-center gap-4 pt-2">

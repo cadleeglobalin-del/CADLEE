@@ -41,7 +41,7 @@ export default function HeroSlider({
   return (
     <section
       aria-label="Featured Footwear Collections"
-      className="relative w-full overflow-hidden bg-[#111111]"
+      className="relative z-10 w-full overflow-hidden bg-[#111111]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
