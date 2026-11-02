@@ -1,0 +1,18 @@
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
+
+export function createAdminClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  // Service role key bypasses RLS for server-side operations (like file uploads),
+  // falling back to anon key if service role is not provided
+  const supabaseKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+  return createSupabaseClient(supabaseUrl, supabaseKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+    },
+  });
+}
+
